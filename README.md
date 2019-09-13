@@ -1,0 +1,2 @@
+# redy
+WP theme 
