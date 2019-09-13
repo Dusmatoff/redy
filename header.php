@@ -20,7 +20,7 @@
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico">
     <?php wp_head(); ?>
 </head>
-<body class="overflow-hidden homepage">
+<body <?php body_class('overflow-hidden'); ?> >
 <!-- PRELOADER -->
 <div id="loader-wrapper" style="position: fixed; left: 0; top: -100px; right: 0; bottom: -100px; z-index: 100;"></div>
 
@@ -47,7 +47,7 @@
 </div>
 <?php endif; ?>
 
-<?php if( is_page_template('page-about.php') || is_page_template('page-real-talk.php' ) || is_page_template('page.php') ): ?>
+<?php if( is_page_template('page-about.php') || is_page_template('page-real-talk.php' ) || is_page_template('page.php') || is_single() ): ?>
 <!-- MIDDLE PATTERN LIGHT -->
 <div class="middle-pattern">
     <div class="lazy-load-img" data-img-src="<?php echo get_template_directory_uri(); ?>/svg/middle-pattern-animated-light.svg">

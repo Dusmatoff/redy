@@ -16,3 +16,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 redy is based on Underscores https://underscores.me/, (C) 2012-2017 Automattic, Inc.
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
+.wpcf7-form-control-wrap{
+    margin-right: 10px;
+}
+span.wpcf7-not-valid-tip,
+div.wpcf7-response-output,
+.wpcf7-mail-sent-ok{
+    display: none!important;
+}
+div.wpcf7 .ajax-loader{
+    position: absolute;
+    left: 100%;
+    top: 33%;
+}
+.post .flex{
+    flex-wrap: wrap;
+    justify-content: space-between;
+}

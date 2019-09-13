@@ -100,5 +100,14 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
+#single.php
+msgid "By"
+msgstr ""
+
+msgid "on"
+msgstr ""
+
+msgid "Share On"
+msgstr ""
 
 

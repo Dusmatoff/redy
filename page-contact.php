@@ -8,7 +8,7 @@ $title = get_field('title');
 $subtitle = get_field('subtitle');
 $email = get_field('email');
 $form_title = get_field('form_title');
-$form_shortcode = get_field('form_shortcode');
+$contact_form_shortcode = get_field('contact_form_shortcode');
 ?>
 
     <div class="custom-container text-center-sm">
@@ -26,19 +26,7 @@ $form_shortcode = get_field('form_shortcode');
                 <div class="white-box">
                     <?php if($form_title): ?><h2 class="h3"><?php echo $form_title; ?></h2><?php endif; ?>
                     <div class="space-4"></div>
-                    <form action="/" class="form">
-                        <input type="text" name="first-name" placeholder="First Name" required>
-                        <div class="space-5"></div>
-                        <input type="text" name="last-name" placeholder="Last Name" required>
-                        <div class="space-5"></div>
-                        <input type="email" name="email" placeholder="Email Address" required>
-                        <div class="space-5"></div>
-                        <textarea name="message" cols="30" rows="3" placeholder="Message"></textarea>
-                        <div class="text-center">
-                            <div class="space-4"></div>
-                            <span class="button open-popup" data-rel="thanks-popup">Send it!</span>
-                        </div>
-                    </form>
+                    <?php echo $contact_form_shortcode ? do_shortcode($contact_form_shortcode) : ''; ?>
                 </div>
             </div>
         </div>

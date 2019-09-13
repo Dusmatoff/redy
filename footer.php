@@ -18,6 +18,8 @@ $form_text = get_field('form_text', 'option');
 $form_shortcode = get_field('form_shortcode', 'option');
 $copyright = get_field('copyright', 'option');
 $form_privacy = get_field('form_privacy', 'option');
+$thanks_popup_title = get_field('thanks_popup_title', 'option');
+$thanks_popup_text = get_field('thanks_popup_text', 'option');
 ?>
 <!-- GIVES BACK SECTION END -->
 <div class="space-1"></div>
@@ -95,17 +97,7 @@ $form_privacy = get_field('form_privacy', 'option');
                     </div>
                     <?php endif; ?>
                     <div class="space-5"></div>
-                    <!-- <form action="/" class="form">
-                        <input type="text" name="name" placeholder="First Name">
-                        <input type="email" name="email" placeholder="Email Address">
-                        <span class="button light open-popup" data-rel="thanks-popup">Sign up</span>
-                    </form> -->
-                    <form action="/" class="form gives-back-form">
-                        <input type="text" name="first-name" placeholder="<?php esc_html_e( 'First Name', 'redy' ); ?>">
-                        <input type="text" name="last-name" placeholder="<?php esc_html_e( 'Last Name', 'redy' ); ?>">
-                        <input type="email" name="email" placeholder="<?php esc_html_e( 'Email Address', 'redy' ); ?>">
-                        <span class="button light open-popup" data-rel="thanks-popup"><?php esc_html_e( 'Sign up', 'redy' ); ?></span>
-                    </form>
+                    <?php echo $form_shortcode ? do_shortcode($form_shortcode) : ''; ?>
                 </div>
             </div>
             <?php endif; ?>
@@ -237,11 +229,9 @@ $form_privacy = get_field('form_privacy', 'option');
             </div>
             <div class="popup-align text-center">
                 <div class="space-4"></div>
-                <h3><?php esc_html_e( 'Your subscription is completed!', 'redy' ); ?></h3>
+                <?php if($thanks_popup_title): ?><h3><?php echo $thanks_popup_title; ?></h3><?php endif; ?>
                 <div class="space-4"></div>
-                <div class="simple-article">
-                    <p><?php esc_html_e( 'text', 'redy' ); ?> <span>REDY</span>.</p>
-                </div>
+                <?php if($thanks_popup_text): ?><div class="simple-article"><p><?php echo $thanks_popup_text; ?></p></div><?php endif; ?>
             </div>
             <div class="button-close">
                 <span></span>

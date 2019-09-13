@@ -56,8 +56,7 @@ function redy_scripts() {
     wp_enqueue_style('redy-main-style', get_template_directory_uri() . '/css/main.css');
 
     wp_deregister_script('jquery');
-    //wp_register_script('jquery', get_template_directory_uri() . '/js/jquery.min.js', '', '', true);
-    wp_enqueue_script('jquery2', get_template_directory_uri() . '/js/jquery.min.js', '', '', true);
+    wp_register_script('jquery', get_template_directory_uri() . '/js/jquery.min.js', '', '', false);
     wp_enqueue_script( 'swiper', get_template_directory_uri() . '/js/swiper.jquery.min.js', '', '', true );
     wp_enqueue_script( 'global', get_template_directory_uri() . '/js/global.js', '', '', true );
     wp_enqueue_script( 'select2', get_template_directory_uri() . '/js/select2.min.js', '', '', true );
@@ -72,7 +71,7 @@ add_action( 'wp_enqueue_scripts', 'redy_scripts' );
 //Enqueue styles in footer
 function redy_get_footer(){
     wp_enqueue_style('redy-style', get_template_directory_uri() . '/css/style.css');
-    wp_enqueue_style('redy-add-style', get_template_directory_uri() . '/css/add.css');
+    wp_enqueue_style('redy-add-style', get_stylesheet_uri());
 }
 add_action('get_footer','redy_get_footer');
 
@@ -99,3 +98,51 @@ function add_file_types_to_uploads($file_types){
 }
 add_action('upload_mimes', 'add_file_types_to_uploads');
 
+
+/**
+ * Disable the emoji's
+ */
+function disable_emojis() {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );	
+	remove_filter( 'the_content_feed', 'wp_staticize_emoji' );
+	remove_filter( 'comment_text_rss', 'wp_staticize_emoji' );	
+	remove_filter( 'wp_mail', 'wp_staticize_emoji_for_email' );
+	add_filter( 'tiny_mce_plugins', 'disable_emojis_tinymce' );
+}
+add_action( 'init', 'disable_emojis' );
+
+/**
+ * Filter function used to remove the tinymce emoji plugin.
+ * 
+ * @param    array  $plugins  
+ * @return   array             Difference betwen the two arrays
+ */
+function disable_emojis_tinymce( $plugins ) {
+	if ( is_array( $plugins ) ) {
+		return array_diff( $plugins, array( 'wpemoji' ) );
+	} else {
+		return array();
+	}
+}
+
+/* Add classes to body */
+add_filter( 'body_class','redy_class_names' );
+function redy_class_names( $classes ) {
+	if( is_front_page() ){
+	    $classes[] = 'homepage';
+	}
+	
+	if( is_page_template('page-about.php') || is_page_template('page-real-talk.php') || is_page_template('page-gives-back.php') || is_page_template('page.php') || is_single() ){
+	    $classes[] = 'bg-pink about-page';
+	}
+	
+	if( is_page_template('page-contact.php') ){
+	    $classes[] = 'step-page in-touch';
+	}
+		
+
+	return $classes;
+}
